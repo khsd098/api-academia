@@ -1,0 +1,28 @@
+import { Repository } from "../repositories/JsonRepository";
+import { ValidationError, NotFoundError } from "../errors";
+class AlunoModel extends Repository<Aluno> {
+
+    create(aluno: Aluno) {
+
+        if (!aluno.nome) {
+            throw new ValidationError(
+                "Nome é obrigatório"
+            );
+        }
+
+        return super.create(aluno);
+    }
+
+    getById(id: number) {
+
+        const aluno = this.findById(id);
+
+        if (!aluno) {
+            throw new NotFoundError(
+                "Aluno não encontrado"
+            );
+        }
+
+        return aluno;
+    }
+}
