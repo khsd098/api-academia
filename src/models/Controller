@@ -1,0 +1,28 @@
+try/catch
+
+next(error)
+import { Request, Response, NextFunction } from "express";
+
+export class AlunoController {
+
+    getById(
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ) {
+
+        try {
+
+            const id = Number(req.params.id);
+
+            const aluno = alunoModel.getById(id);
+
+            res.json(aluno);
+
+        } catch (error) {
+
+            next(error);
+
+        }
+    }
+}
